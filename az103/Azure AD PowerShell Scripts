@@ -1,0 +1,29 @@
+
+https://docs.microsoft.com/en-us/powershell/module/azuread/?view=azureadps-2.0
+https://docs.microsoft.com/en-us/azure/active-directory/users-groups-roles/groups-settings-v2-cmdlets
+https://gcits.com/knowledge-base/install-azure-active-directory-powershell-module/
+https://docs.microsoft.com/en-us/powershell/module/azurerm.resources/?view=azurermps-6.13.0
+https://docs.microsoft.com/en-us/powershell/module/az.resources/get-azaduser?view=azps-3.8.0
+
+
+
+Install-Module -Name MSOnline
+
+Connect-AzureAD
+get-azureadgroup
+get-azureadgroup -ObjectId e29bae11-4ac0-450c-bc37-6dae8f3da61b
+Get-AzureADGroup -Filter "DisplayName eq 'Intune Administrators'"
+
+New-AzureADGroup -Description "Finance" -DisplayName "Finance" -MailEnabled $false -SecurityEnabled $true -MailNickName "Finance"
+Get-AzureADGroup -Filter "DisplayName eq 'Intune Administrators'"
+
+Set-AzureADGroup -ObjectId 31f1ff6c-d48c-4f8a-b2e1-abca7fd399df -Description "Intune Device Administrators"
+Remove-AzureADGroup -ObjectId b11ca53e-07cc-455d-9a89-1fe3ab24566b
+Get-AzureADGroupMember -ObjectId 31f1ff6c-d48c-4f8a-b2e1-abca7fd399df
+Remove-AzureADGroupMember -ObjectId 31f1ff6c-d48c-4f8a-b2e1-abca7fd399df -MemberId 72cd4bbd-2594-40a2-935c-016f3cfeeeea
+
+Get-MsolCompanyInformation | fl UsersPermissionToCreateGroupsEnabled
+Set-MsolCompanySettings -UsersPermissionToCreateGroupsEnabled $False
+
+Add-AzureADGroupOwner -ObjectId 31f1ff6c-d48c-4f8a-b2e1-abca7fd399df -RefObjectId 72cd4bbd-2594-40a2-935c-016f3cfeeeea
+
