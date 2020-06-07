@@ -1,0 +1,43 @@
+/*Creating an AKS cluster on Azure
+
+//Create a resource group
+az group create --name myresourcegroup11 --location eastus
+
+ //Create an AKS cluster
+az aks create --resource-group myresourcegroup101 --name prademoakscluster201 --node-count 2 --enable-addons monitoring --generate-ssh-keys
+
+ //to install kubectl
+az aks install-cli
+
+ //Configure and connect with kubernetes cluster
+az aks get-credentials --resource-group myresourcegroup11 --name prademoakscluster101
+
+ //Get nodes
+kubectl get nodes
+
+ //Deploy and run the application, download and clone the file from github
+kubectl apply -f azure-vote.yaml    (https://docs.microsoft.com/en-us/azure/aks/kubernetes-walkthrough)
+
+//test the application
+kubectl get service azure-vote-front --watch
+
+//once it gives external IP address then launch it with that.
+
+
+//finally we want to see the AKS dashboard
+az aks browse --resource-group myresourcegroup11 --name prademoakscluster101
+
+try opening the site with 127.0.0.1:8001
+
+//if it throws error then run below command
+kubectl create clusterrolebinding kubernetes-dashboard --clusterrole=cluster-admin --serviceaccount=kube-system:kubernetes-dashboard
+
+
+//get pods
+kubectl get pods
+
+//get deployment details
+kubectl get deployments
+
+//get services
+kubectl get services
