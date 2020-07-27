@@ -1,0 +1,36 @@
+
+Connect-AzAccount
+
+New-AzResourceGroup -Name vnetpeeringrg1 -Location "East US"
+New-AzResourceGroup -Name vnetpeeringrg2 -Location "East US"
+
+New-AzVirtualNetwork -Name vnet1 -ResourceGroupName vnetpeeringrg1 -Location "East US" -AddressPrefix "10.0.0.0/16" -Subnet $vmsubnet
+New-AzVirtualNetwork -Name vnet2 -ResourceGroupName vnetpeeringrg2 -Location "East US" -AddressPrefix "10.1.0.0/16" -Subnet $vmsubnet2
+
+$mylogin = Get-Credential
+New-AzVm -ResourceGroupName vnetpeeringrg1 -Name "prademovm1" -Location "East US" -VirtualNetworkName "vnet1" -SubnetName "vmsubnet" -addressprefix 10.0.2.0/24 -PublicIpAddressName "pip1" -OpenPorts 3389 -Image win2019datacenter -Size Standard_DS1_v2 -Credential $mylogin
+
+$mylogin = Get-Credential
+New-AzVm -ResourceGroupName vnetpeeringrg2 -Name "prademovm2" -Location "East US" -VirtualNetworkName "vnet2" -SubnetName "vmsubnet2" -addressprefix 10.1.3.0/24 -PublicIpAddressName "pip2" -OpenPorts 3389 -Image win2019datacenter -Size Standard_DS1_v2 -Credential $mylogin
+
+
+
+Now to do virtual network peering So using below commands in Powershell done Vnet peering:
+
+
+$vnet1 = Get-AzVirtualNetwork -Name vnet1 -ResourceGroupName vnetpeeringrg1
+$vnet2 = Get-AzVirtualNetwork -Name vnet2 -ResourceGroupName vnetpeeringrg2
+
+Add-AzVirtualNetworkPeering -Name vnet1tovnet2 -VirtualNetwork $vnet1 -RemoteVirtualNetworkId $vnet2.Id
+
+$vnet1 = Get-AzVirtualNetwork -Name vnet1 -ResourceGroupName vnetpeeringrg1
+$vnet2 = Get-AzVirtualNetwork -Name vnet2 -ResourceGroupName vnetpeeringrg2
+
+Add-AzVirtualNetworkPeering -Name vnet2tovnet1 -VirtualNetwork $vnet2 -RemoteVirtualNetworkId $vnet1.Id
+
+
+Now we need to allow ICMP traffic: on Vnet 1 and vnet 2
+
+netsh advfirewall firewall add rule name="ICMP Allow incoming V4 echo request" protocol="icmpv4:8,any" dir=in action=allow
+
+when we do this automatically you can see new INbound rule with Priority 1010
