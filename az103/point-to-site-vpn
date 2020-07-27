@@ -1,0 +1,53 @@
+
+1. create new virtual network
+2. create new virtual network gateway
+3. create new azure VM without Public IP address
+4. Generate Root and Child certificates
+
+
+4a. $cert = New-SelfSignedCertificate -Type Custom -KeySpec Signature `
+	-Subject "CN=P2SRootCert" -KeyExportPolicy Exportable `
+	-HashAlgorithm sha256 -KeyLength 2048 `
+	-CertStoreLocation "Cert:\CurrentUser\My" -KeyUsageProperty Sign -KeyUsage CertSign
+
+
+4b. generate child certificate:
+
+	New-SelfSignedCertificate -Type Custom -DnsName P2SChildCert -KeySpec Signature `
+	-Subject "CN=P2SChildCert" -KeyExportPolicy Exportable `
+	-HashAlgorithm sha256 -KeyLength 2048 `
+	-CertStoreLocation "Cert:\CurrentUser\My" `
+	-Signer $cert -TextExtension @("2.5.29.37={text}1.3.6.1.5.5.7.3.2")
+
+
+4c. Searching for that key 
+search for PS root:
+Get-ChildItem -Path "Cert:\CurrentUser\My"
+
+it should the result as below: 
+this is just for reference (11BF27D8353A2045A3998EA99E5BCED79A5328CD)
+
+################################################################################################################################################
+
+$cert = Get-ChildItem -Path "Cert:\CurrentUser\My\11BF27D8353A2045A3998EA99E5BCED79A5328CD"
+
+
+################################################################################################################################################
+Now go back to your MMC console --> export private key without private key, with base x.509 encryption.
+
+
+
+#########################################################################################
+5. Open virtual network gateway --> click on VPN connection --> give some generic name --> add IP address 172.16.25.0/24. 
+   For tunnel type use both SSTP & IKEv2
+   Save it
+   
+6. In order to connect from local laptop/desktop --> click on Download VPN client.
+
+6a. Another way to download the files from powershell, type below command in your powershell commandlet and then it will generate a unique https link for download.
+
+
+$profile=New-AzVpnClientConfiguration -ResourceGroupName "P2SDemoResouceGroup" -Name "point_to_site_vnet_gateway" -AuthenticationMethod "EapTls"
+
+$profile.VPNProfileSASUrl
+

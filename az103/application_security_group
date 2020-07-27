@@ -1,0 +1,55 @@
+# pre-requisites
+# 
+1. Create 2 vnet's
+2. Create 2 subnets
+3. Create 2 vm's ( 1st vm subnet: 192.168.0.4) - RDP Allowed (priority 300)
+       ( 2nd vm subnet: 192.168.1.4 and no Public IP address)- No RDP rule
+
+
+4. Create 2 new Application security groups 
+   a. provide generic name for each security group.
+   b. make sure both ASG's should be in a same region
+
+5. Go to Database Named Azure VM --> go to network properties --> click on application security group --> select appropriate one
+4. Database VM networking --> go to inbound port rules --> 
+   select source "Application Security group"
+   source application security group --> Webserver ASG   
+   source port range *
+   Destination "Application security group"
+   Destination "Database ASG"
+   Desitnation port range : 3389
+action "allow"
+name: allowrdpfromws
+
+Add.
+
+5. Login to 1st VM which is webserver VM
+6. open RDP session --> enter 2nd VM private IP
+
+
+
+
+IP v4: 10.1.0.0/16
+Subnet: 10.1.0.0/24
+
+
+ =======================================================================================================================================
+Another example of Application Security group for allowing Http/https traffic.
+
+1. create 2 new vnets
+2. create 2 new vm's
+
+
+3. Open DB (AzureVM) server-->open NSG --> go to subnets --> associate --> DB vnet --> db subnet -->ok
+4. Open DB (AzureVM) server-->open nsg --> inbound security rules
+   Destination --> application security group -->web nsg
+   port 80, 443
+   priority : 101
+  
+   open nsg --> inbound security rules
+   Destination --> application security group -->DB nsg
+   port 3389
+   priority : tcp 111
+
+
+5. Login to DB (Azure VM) --> Launch IE --> Try accessing any https website.
