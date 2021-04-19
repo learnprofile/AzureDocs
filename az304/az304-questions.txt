@@ -38,14 +38,6 @@ Because the DNS suffix is different in each virtual network, you can use conditi
 send DNS queries to the correct virtual network for resolution.
 
 
-
-
-
-
-
-
-•    Recommend a Solution for Network Provisioning
-
 •    Recommend a Solution for Network Security
 
 Network Security
