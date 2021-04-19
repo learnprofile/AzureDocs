@@ -1,0 +1,86 @@
+Contents
+■ Module 0 Welcome . . . . . . . . . . . . . . . . . . . . . 
+Start Here . . . . . . . . . . . . . . . . . . . . . . . . . . .
+■ Module 1 Design a Compute Solution......................
+Choose an Azure Compute Service . . . . . . . . . . . . . . . . . . . . . . . . .
+Determine Appropriate Compute Technologies . . . . . . . . . . . . . . . . . . . 
+Recommend a Solution for Containers . . . . . . . . . . . . . . . . . . . . . . .
+Provisioning Solutions for Azure Compute Infrastructure . . . . . . . . . . . . .
+Module 1 Review Questions . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+■ Module 2 Design a Network Solution . . . . . . . . . . . . . . . . . . . . . . . 
+Planning Virtual Networks . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Recommend a Solution for Network Addressing and Name Resolution . . . . . . . . . . . . . . 
+Recommend Solutions for Network Security . . . . . . . . . . . . . . . . . . . . . . 
+Recommendation for Hybrid Networks . . . . . . . . . . . . . . . . . . . . . . . . . 
+Implement a Secure Hybrid Network . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Module 2 Review Questions . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+■ Module 3 Design for Migration . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+Planning Azure Migration . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+Assessment using Azure Migrate . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Migrate Servers with Azure Migrate . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Migrate Databases with Azure Database Migration Service . . . . . . . . . . . . . . . . . . . . . . . .
+Migrate On-Premises Data to Cloud Storage with AzCopy . . . . . . . . . . . . . . . . . . . . . . 
+Lab . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+Module 3 Review Questions . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+■ Module 4 Design Authentication and Authorization . . . . . . . . . . . . . . . . . . . . .
+Tips for Identity and Access Management . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Recommend a Solution for Multi-Factor Authentication . . . . . . . . . . . . . . . . . . . .
+Five Steps for Securing Identity Infrastructure . . . . . . . . . . . . . . . . . . . . . . . .
+Recommend a Solution for Single-Sign On (SSO) . . . . . . . . . . . . . . . . . . . . . . . 
+Recommend a Solution for a Hybrid Identity . . . . . . . . . . . . . . . . . . . . . . . . . 
+Recommend a Solution for B2B Integration . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+Recommend a Hierarchical Structure for Management Groups, Subscriptions and Resource Groups 
+Lab . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Module 4 Review Questions . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+■ Module 5 Design Governance . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+Governance . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+Recommend a Solution for using Azure Policy . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+Recommend a Solution for using Azure Blueprint . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+Module 5 Review Questions . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+■ Module 6 Design a Solution for Databases . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+Select an Appropriate Data Platform Based on Requirements . . . . . . . . . . . . . . . . . . . . .
+Overview of Azure Data Storage . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Recommend Database Service Tier Sizing . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Dynamically Scale Azure SQL Database and Azure SQL Managed Instances . . . . . . . . . . . . . .
+Recommend a Solution for Encrypting Data at Rest, Transmission, and In Use . . . . . . . . .
+Lab . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Module 6 Review Questions . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+■ Module 7 Select an Appropriate Storage Account . . . . . . . . . . . . . . . . . .
+Choose Between Storage Tiers . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Recommend Storage Management Tools . . . . . . . . . . . . . . . . . . . . . . . . . . 
+Module 7 Review Questions . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+■ Module 8 Design Data Integration . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Azure Data Platform End-to-End . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+Recommend a Solution for Data Integration . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+Recommend a Solution for Data Warehousing and Big Data Analytics Integration . . . . . . . . .
+Module 8 Review Questions . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+■ Module 9 Design a Solution for Logging and Monitoring . . . . . . . . . . . . . . . . . . .
+Monitoring . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+Azure Monitor.............................................................
+Module 9 Review Questions . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+■ Module 10 Design a Solution for Backup and Recovery . . . . . . . . . . . . . . . . . . . . 
+Architectural Best Practices for Reliability . . . . . . . . . . . . . . . . . . . . . . . . . .
+Recommend an Azure Site Recovery Solution . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+Design a Solution for Data Archiving and Retention . . . . . . . . . . . . . . . . . . . . .
+Module 10 Review Questions . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+■ Module 11 Design for High Availability . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+High Availability . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Applications in Multiple Azure Regions for High Availability . . . . . . . . . . . . . .
+Design HA Applications to Handle Disaster Recovery . . . . . . . . . . . . . . . . . 
+Module 11 Review Questions . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+■ Module 12 Design for Cost Optimization . . . . . . . . . . . . . . . . . . . . . . . . . . 
+Recommend Solutions for Cost Management . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+Recommendations for Minimizing Costs . . . . . . . . . . . . . . . . . . . . . . 
+Cost Optimization Checklists . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+Module 12 Review Questions . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+■ Module 13 Design an Application Architecture . . . . . . . . . . . . . . . . . . .
+Recommend Event-Based Cloud Automation on Azure . . . . . . . . . . . . . . . . . 
+Microservices Architecture on Azure Service Fabric . . . . . . . . . . . . . .
+Designing APIs for Microservices . . . . . . . . . . . . . . . . . . . . . . . . . . 
+Lab . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+Module 13 Review Questions . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+■ Module 14 Design Security for Applications . . . . . . . . . . . . . . . . . . . . . . . . 
+Security for Applications and Services . . . . . . . . . . . . . . . . . . . . . . . . 
+Recommend a Solution using Key Vault . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+Recommend Solutions using Azure AD Managed Identities . . . . . . . . . . . . . . . . . . . . .
+Module 14 Review Questions . . . . . . . . . . . . . . . . . . . . . . 

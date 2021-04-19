@@ -1,0 +1,179 @@
+Module 2: Design a Network Solution
+In this module, you will learn about solutions for network addressing and name resolution, network provisioning, and network security.
+Lessons
+•    Recommend a Solution for Network Addressing and Name Resolution                   - For network addressing and Name resolution
+
+When resources deployed in virtual networks need to resolve domain names to internal IP addresses, 
+they can use one of three methods:
+● Azure DNS private zones
+● Azure-provided name resolution
+● Name resolution that uses your own DNS server (which might forward queries to the Azure-provided DNS servers)
+
+Azure-Provided Name Resolution
+Azure provided name resolution provides only basic authoritative DNS capabilities. If you use this option 
+the DNS zone names and records will be automatically managed by Azure and you will not be able to 
+control the DNS zone names or the life cycle of DNS records. If you need a fully featured DNS solution for 
+your virtual networks you must use Azure DNS private zones or Customer-managed DNS servers.
+Azure provides internal name resolution for VMs and role instances that reside within the same virtual 
+network or cloud service. VMs and instances in a cloud service share the same DNS suffix, so the host 
+name alone is sufficient. But in virtual networks deployed using the classic deployment model, different 
+cloud services have different DNS suffixes. In this situation, you need the FQDN to resolve names between different cloud services.
+In virtual networks deployed using the Azure Resource Manager deployment model, the DNS suffix is 
+consistent across all virtual machines within a virtual network, so the FQDN is not needed. DNS names 
+can be assigned to both VMs and network interfaces.
+
+
+
+Name Resolution using your own DNS Server
+Azure provides the ability for you to use your own DNS servers. DNS servers within a virtual network can 
+forward DNS queries to the recursive resolvers in Azure. This enables you to resolve host names within 
+that virtual network.
+Forwarding queries allows VMs to see both your on-premises resources (via the DC) and Azure-provided 
+host names (via the forwarder). Access to the recursive resolvers in Azure is provided via the virtual IP 
+168.63.129.16.
+DNS forwarding also enables DNS resolution between virtual networks and allows your on-premises 
+machines to resolve Azure-provided host names. In order to resolve a VM's host name, the DNS server 
+VM must reside in the same virtual network, and be configured to forward host name queries to Azure.
+Because the DNS suffix is different in each virtual network, you can use conditional forwarding rules to 
+send DNS queries to the correct virtual network for resolution.
+
+
+
+
+
+
+
+
+•    Recommend a Solution for Network Provisioning
+
+•    Recommend a Solution for Network Security
+
+Network Security
+Network security is protecting the communication of resources within and outside of your network. The 
+goal is to limit exposure at the network layer across your services and systems. By limiting this exposure, 
+you decrease the likelihood that your resources can be attacked. In the focus on network security, efforts 
+can be focused on the following areas:
+● Securing traffic flow between applications and the internet
+● Securing traffic flow amongst applications
+● Securing traffic flow between users and the application
+Securing traffic flow between applications and the internet focuses on limiting exposure outside your 
+network. Network attacks will most frequently start outside your network, so by limiting the internet 
+exposure and securing the perimeter, the risk of being attacked can be reduced.
+Securing traffic flow amongst applications focuses on data between applications and their tiers, between 
+different environments, and in other services within your network. By limiting exposure between these 
+resources, you reduce the effect a compromised resource can have.
+Securing traffic flow between users and the application focuses on securing the network flow for your 
+end users
+
+
+
+
+
+•    Recommend a Solution for Internet Connectivity and On-Premises Networks
+
+Virtual Network Security
+Once inside a virtual network, it's important to limit communication between resources to only what is 
+required. For communication between virtual machines, network security groups are a critical piece to restrict 
+unnecessary communication. Network security groups operate at layers 3 & 4 and provide a list of 
+allowed and denied communication to and from network interfaces and subnets. Network security 
+groups are fully customizable and give you the ability to fully lock down network communication to and 
+from your virtual machines
+
+Network Integration
+It's common to have existing network infrastructure that needs to be integrated to provide communication from on-premises networks, or to provide improved communication between services in Azure. 
+There are a few key ways to handle this integration and improve the security of your network.
+Virtual private network (VPN) connections are a common way of establishing secure communication 
+channels between networks, and this is no different when working with virtual networking on Azure. 
+Connection between Azure virtual networks and an on-premises VPN device is a great way to provide 
+secure communication between your network and your virtual machines on Azure.
+To provide a dedicated, private connection between your network and Azure, you can use ExpressRoute. 
+ExpressRoute lets you extend your on-premises networks into the Microsoft cloud over a private connection facilitated by a connectivity provider. With ExpressRoute, you can establish connections to Microsoft 
+cloud services, such as Microsoft Azure, Office 365, and Dynamics 365. This improves the security of your 
+on-premises communication by sending this traffic over the private circuit instead of over the internet.
+
+
+ExpressRoute Circuits
+With ExpressRoute, the logical connection between your on-premises network and your Azure network is 
+called a circuit. You configure traffic management and routing in ExpressRoute by using circuits. You can 
+have multiple circuits, which exist across various regions. ExpressRoute circuits also support connections 
+through many connectivity providers.
+Each circuit has multiple routing domains and peerings associated with it. Examples include Azure public 
+peering, Azure private peering, and Microsoft peering. Each type has identical properties. Each circuit 
+uses a pair of routers in either an active-active or load-sharing configuration, which creates a high 
+availability environment. An ExpressRoute circuit doesn't map to anything physical.
+Azure private peering
+Private peering is a trusted extension of your core network in Azure with bidirectional connectivity. By 
+using this peering model, you can connect to virtual machines and cloud services directly on their private 
+IP addresses.
+Microsoft peering
+Microsoft peering provides connectivity to all Microsoft online services: Office 365, Dynamics 365, and 
+Azure platform as a service (PaaS). This model requires a public IP address, owned by you or your connectivity provider, which adheres to a set of predefined rules.
+Each circuit is assigned a globally unique identifier (GUID), or service key. This key is the only information 
+exchanged between the three parties and is a one-to-one mapping for each circuit.
+Circuit bandwidth
+You can have as many circuits as you need, each matching the bandwidth you require. For example, you 
+might want a higher bandwidth between your datacenter and the cloud, but a lower bandwidth for your 
+satellite offices. Bandwidth speeds come in fixed tiers:
+● 50 Mbps
+● 100 Mbps
+● 200 Mbps
+● 500 Mbps
+● 1 Gbps
+● 10 Gbps
+● 100 Gbps
+
+
+
+
+
+•    Recommend a Solution for Automating Network Management
+•    Recommend a Solution for Load Balancing and Traffic Routing
+After completing this module, students will be able to:
+•    Solutions for network addressing and name resolution
+•    Solutions for network security including private endpoints, firewalls, and gateways
+•    Recommendations for network connectivity to the Internet, on-premises networks, and other VNets
+•    Recommendations for load balancing and traffic routing
+
+
+
+
+Questions:
+
+Question 1
+You are designing a solution for an on-premises network to deploy a virtual appliance.
+The plan is to deploy several Azure virtual machines and connect the on-premises network to Azure by 
+using a site-to-site connection.
+All network traffic that will be directed from the Azure virtual machines to a specific subnet must flow 
+through the virtual appliance.
+You need to recommend a solution to manage network traffic.
+What is the solution?
+ Implement an Azure virtual network
+ Implement Azure ExpressRoute
+ Implement Azure Batch Service
+ Configure Azure Traffic Manager
+
+
+
+Question 2
+You are designing a solution for on-premises networks and Azure virtual networks.
+You need a secure private connection between on-premises networks and the Azure virtual networks. The 
+connection must offer a redundant pair of cross connections to provide high availability.
+What should you recommend?
+ Virtual network peering
+ Azure Load Balancer
+ VPN Gateway
+ ExpressRoute54  Module 2 Design a Network Solution
+
+
+Question 3
+You use a virtual network to extend an on-premises IT environment into the cloud. The virtual network has 
+two virtual machines that store sensitive data.
+The data must only be available using internal communication channels. Internet access to those VMs is not 
+permitted.
+You need to ensure that the VMs cannot access the Internet.
+What should you recommend?
+ Azure ExpressRoute
+ Azure Load Balancer
+ Source Network Address Translation (SNAT)
+ Network Security Groups (NSG)
+
