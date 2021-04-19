@@ -1,0 +1,71 @@
+Login-azaccount
+ 
+# If you have multiple subscriptions on your account run the following command:
+# Get-AzSubscription
+# It will output all your subscriptions. Find the name of the subscription you
+# want to use and run the following command:
+# Select-AzSubscription -SubscriptionName "Your_subscription_name"
+
+# virtual network
+# virtual network gateway + # public IP address
+# connections
+# local network gateway
+
+
+ 
+ 
+ 
+ 
+# Setting variables
+$location = "West Europe"
+$resourceGroupName = "prademo.azure.site"
+ 
+$virtualNetworkName = "prademo.azure.site.network"
+$virtualNetworkRange = "10.10.0.0/16"
+$virtualNetworkDNS = @("192.168.2.4")
+ 
+$subnetName = "prademo.azure.site.production"
+$subnetAddressRange = "10.10.0"
+$gatewayAddressRange = "10.10.255"
+ 
+$localGatewayName = "prademo.local.gateway"
+$localGatewayIPaddress = "77.x.x.14"
+$localNetworkRange = @("192.168.2.0/24")
+ 
+$gatewayIpName = "prademo.azure.site.gateway.ip"
+$gatewayName = "prademo.azure.site.gateway"
+ 
+$connectionName = "prademo.azure.site.S2S.prademo.local"
+$sharedKey = "testKey123!"
+ 
+# Create the Resource Group
+New-AzResourceGroup -Name $resourceGroupName -Location $location
+ 
+# Define the subnets and create the Virtual network
+$subnet1 = New-AzVirtualNetworkSubnetConfig -Name $subnetName -AddressPrefix "$($subnetAddressRange).0/24"
+$subnet2 = New-AzVirtualNetworkSubnetConfig -Name 'GatewaySubnet' -AddressPrefix "$($gatewayAddressRange).0/24"
+$virtualNetwork = New-AzVirtualNetwork -Name $virtualNetworkName -ResourceGroupName $resourceGroupName -Location $location -AddressPrefix $virtualNetworkRange -Subnet $subnet1, $subnet2
+if($virtualNetworkDNS){
+$virtualNetwork.DhcpOptions.DnsServers = $virtualNetworkDNS
+Set-AzVirtualNetwork -VirtualNetwork $virtualNetwork
+}
+ 
+# Create the Local Network Gateway
+$gatewayLocal = New-AzLocalNetworkGateway -Name $localGatewayName -ResourceGroupName $resourceGroupName -Location $location -GatewayIpAddress $localGatewayIPaddress -AddressPrefix $localNetworkRange
+ 
+# Create the Public IP Address
+$azureGatewayIpAdress = New-AzPublicIpAddress -Name $gatewayIpName -ResourceGroupName $resourceGroupName -Location $location -AllocationMethod Dynamic
+ 
+# Define properties for and create the Virtual Network Gateway
+$gatewaySubnet = Get-AzVirtualNetworkSubnetConfig -Name 'GatewaySubnet' -VirtualNetwork $virtualNetwork
+$gatewayIpConfig = New-AzVirtualNetworkGatewayIpConfig -Name gwipconfig -SubnetId $gatewaySubnet.Id -PublicIpAddressId $azureGatewayIpAddress.Id
+$gatewayAzure = New-AzVirtualNetworkGateway -Name $gatewayName -ResourceGroupName $resourceGroupName -Location $location -IpConfigurations $gatewayIpConfig -GatewayType Vpn -VpnType RouteBased -GatewaySku Basic
+$azureGatewayIpAddress = Get-AzPublicIpAddress -Name $gatewayIpName -ResourceGroupName $resourceGroupName
+ 
+# Create the Connection
+New-AzVirtualNetworkGatewayConnection -Name $connectionName -ResourceGroupName $resourceGroupName -Location $location -VirtualNetworkGateway1 $gatewayAzure -LocalNetworkGateway2 $gatewayLocal -ConnectionType IPsec -RoutingWeight 10 -SharedKey $sharedKey
+ 
+# Output values needed for on-premises Gateway configuration
+Write-Host "Azure Gateway IP Address : $($azureGatewayIpAddress.IpAddress)"
+Write-Host "Azure Gateway SharedSecret: $sharedKey"
+Write-Host "Azure Virtual Network address space: $virtualNetworkRange"

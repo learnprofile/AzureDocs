@@ -1,0 +1,80 @@
+New-AzResourceGroup -name myresourcegroup -location "eastus"
+
+Create a private DNS zone:
+
+Install-Module -Name Az.PrivateDns -force
+
+$backendSubnet = New-AzVirtualNetworkSubnetConfig -Name backendSubnet -AddressPrefix "10.2.0.0/24"
+$vnet = New-AzVirtualNetwork `
+  -ResourceGroupName myresourcegroup `
+  -Location eastus `
+  -Name myAzureVNet `
+  -AddressPrefix 10.2.0.0/16 `
+  -Subnet $backendSubnet
+
+$zone = New-AzPrivateDnsZone -Name private.simplilearndemo.com -ResourceGroupName myresourcegroup
+
+$link = New-AzPrivateDnsVirtualNetworkLink -ZoneName private.simplilearndemo.com `
+  -ResourceGroupName myresourcegroup -Name "mylink" `
+  -VirtualNetworkId $vnet.id -EnableRegistration
+  
+  
+  
+List of Private DNS zone:
+$zones = Get-AzPrivateDnsZone -ResourceGroupName myresourcegroup
+$zones
+
+$zones = Get-AzPrivateDnsZone
+$zones
+
+
+Create the test virtual machines
+New-AzVm `
+    -ResourceGroupName "myresourcegroup" `
+    -Name "myVM01" `
+    -Location "East US" `
+	-Image "Win2016Datacenter"
+    -subnetname backendSubnet `
+    -VirtualNetworkName "myAzureVnet" `
+    -addressprefix 10.2.0.0/24 `
+    -OpenPorts 3389
+
+New-AzVm `
+    -ResourceGroupName "myresourcegroup" `
+    -Name "myVM02" `
+    -Location "East US" `
+    -subnetname backendSubnet `
+	-Image "Win2016Datacenter" `
+    -VirtualNetworkName "myAzureVnet" `
+    -addressprefix 10.2.0.0/24 `
+    -OpenPorts 3389
+
+
+Create an additional DNS record
+
+New-AzPrivateDnsRecordSet -Name db -RecordType A -ZoneName private.simplilearndemo.com `
+   -ResourceGroupName myresourcegroup -Ttl 3600 `
+   -PrivateDnsRecords (New-AzPrivateDnsRecordConfig -IPv4Address "10.2.0.4")
+   
+
+View DNS records
+Get-AzPrivateDnsRecordSet -ZoneName private.simplilearndemo.com -ResourceGroupName myresourcegroup
+
+
+
+Test the private zone
+1. Configure VMs to allow inbound ICMP
+
+2. connect to Azure VM 1 --> run below command to allow ICMP traffic:
+
+New-NetFirewallRule –DisplayName "Allow ICMPv4-In" –Protocol ICMPv4
+
+
+3.  Perform step 1 & 2 for VM2 as well
+
+
+Ping the VMs by name
+
+ping myVM01.private.simplilearndemo.com
+
+====================================================================================================
