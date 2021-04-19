@@ -12,3 +12,7 @@
 /FPS_old
 /parameter.json
 /template.json
+*.tf
+*.tf
+*.json
+*.json
