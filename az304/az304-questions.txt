@@ -169,3 +169,650 @@ What should you recommend?
  Source Network Address Translation (SNAT)
  Network Security Groups (NSG)
 
+
+====================================================================================================================================================================
+
+Module 3 Design for Migration
+You can use a framework of Assess, Migrate, Optimize, and Monitor as a path for migration. Each stage 
+focuses on an aspect of ensuring the success of a migration.
+
+ Assess
+ Migrate
+ Optimize
+ Monitor
+
+
+
+Assess:
+Discovery and Evaluation
+Start with a full assessment of your current environment. Identify the servers, applications, and services 
+that are in scope for migration. You can then bring in the IT and business teams that work with those 
+services
+
+produce a full inventory and dependency map of servers and services that are in scope for migration. The inventory and map determine how those services communicate with each other. Each application must be fully investigated before any work takes place.
+For each application, there are multiple migration options:
+● Rehost: Recreate your existing infrastructure in Azure. Choosing this approach has the least impact 
+because it requires minimal changes. It typically involves moving virtual machines from your data 
+center to virtual machines on Azure.
+● Refactor: Move services running on virtual machines to platform-as-a-service (PaaS) services. This 
+approach can reduce operational requirements, improve release agility, and keep your costs low. 
+Small enhancements to run more efficiently in the cloud can have large impacts on performance.
+● Rearchitect: You might be forced to rearchitect some systems so that they can be migrated. Other 
+apps could be changed to become cloud native, or to take advantage of new approaches to software, 
+such as containers or microservices.
+● Rebuild: You might need to rebuild software if the cost to rearchitect it is more than that of starting 
+from scratch.
+● Replace: While you're reviewing your estate, it's possible you'll find that third-party applications could 
+completely replace your custom applications. Evaluate software-as-a-service (SaaS) options that can 
+be used to replace existing applications.
+Review each application to determine which option is the best fit
+
+
+
+Migrate
+
+Deploy Cloud Infrastructure Targets
+You'll need destination systems and services on Azure to migrate to. The scope of your migration has 
+been defined as your company's current VMware machines and existing relational databases. In this 
+scenario, you don't need to create the resources in Azure beforehand. The two tools you'll use to do the 
+migration, Azure Site Recovery and the Azure Database Migration Service, will create the required Azure 
+resources for you.
+
+Migrate workloads
+It's often best to start with a small migration instead of migrating a large, business-critical workload. This 
+approach lets you become familiar with the tools, processes, and procedures for migration. It can reduce
+the risk of issues when you migrate larger workloads. As you become more comfortable with the migration process, you can progress to larger and more business-critical workloads.
+Each tool will guide you through the migration. The steps to complete them are covered in later units. At 
+a high level, the steps are:
+1. Prepare the source (vCenter Server) and target (Azure) environments.
+2. Set up and start the replication between the two.
+3. Test that the replication has worked.
+4. Fail over from the source servers to Azure.
+For the database migrations, the high-level steps are:
+1. Assess your on-premises databases.
+2. Migrate the schemas.
+3. Create and run an Azure Database Migration Service project to move the data.
+4. Monitor the migration.
+Decommission on-premises infrastructure
+After all migrated workloads have been tested and verified as successfully migrated to Azure, you can 
+decommission all your on-premises systems. Even after you decommission them, it can be useful to keep 
+backups and archive data from the migrated systems. This practice gives you a historical archive of data 
+in case it's needed. This data could be stored on-premises, or in a cloud-storage service such as Azure 
+Blob storage
+
+
+Optimize
+
+After your services are migrated, it's important to optimize them to ensure that they're running as 
+efficiently as possible from a cost and performance standpoint.
+Analyze Running Costs
+Use Azure Cost Management to start analyzing your Azure costs at different management scopes. For 
+example, by choosing a subscription in the portal, you can see a breakdown of all the resources for that 
+subscription. Or, you could view a resource group to see all the costs associated with all the resources in 
+just the selected group:
+
+Review Opportunities to Improve
+Azure Cost Management shows you cost-reduction advice from Azure Advisor. The advice includes 
+suggestions like reducing the performance of underused VMs, making use of additional discounts, or 
+reserving resources instead of paying as you go. Azure Advisor also shows you recommendations for 
+network security, high availability, and performance. Review the recommendations that Advisor presents 
+to further optimize your environment
+
+
+Monitor:
+Integrate health and performance monitoring
+Azure Monitor can capture health and performance information from Azure VMs if you install a Log 
+Analytics agent. You can install the agent on machines running either Windows or Linux, and you can 
+then set up alerting and reporting.
+You can set up alerts based on a range of data sources, such as:
+● Specific metric values like CPU usage.
+● Specific text in log files.
+● Health metrics.
+● An Autoscale metric
+
+
+Assessment using Azure Migrate
+
+Using Azure Migrate to Assess Environment
+Using Azure Migrate, you can perform an agentless environment discovery or use agents to perform a 
+dependency analysis. The Azure portal helps you assess your current on-premises workloads. After the 
+assessment, Azure Migrate makes recommendations for the size of VM you'll need to provision.
+Because the server workloads are based primarily on VMware, you want to begin with those machines. 
+You want to assess readiness for the move to Azure. You also want to identify estimated costs for the 
+resources that those machines will consume, so the management team can set the budgets.
+In this lesson, you'll look at Azure Migrate, a service you use to assess readiness and assist with migration 
+to Azure from an on-premises environment.
+Azure Migrate helps with performance-based sizing calculations (virtual machine sizing, compute/
+storage) for the machines that you'll migrate and estimate the ongoing cost of running these machines in 
+Azure.
+Azure Migrate can assess both Hyper-V and VMware-based virtual machines, as well as physical servers. 
+Azure Migrate also supports the visualization of dependencies for those machines. It helps you create 
+groups of machines that can be assessed together and ultimately migrated to Azure at the same time.
+
+
+Work with Azure Migrate
+When you use Azure Migrate, the assessments it produces are created within a project that is set up in 
+the Azure portal. Before creating a project, you can group the VMs according to the various types of VM 
+workloads that you have, assessing and potentially migrating them together..
+After you create a project, Azure Migrate requires you to complete two steps to produce an assessment:
+1. Discover your virtual machines.
+2. Create assessments.
+
+Discover Machines
+To perform an agentless discovery, the Azure Migrate: Server Assessment tool guides you through 
+downloading a lightweight collector appliance, which carries out the discovery of systems in your environment. The collector appliance is available to download to VMware or Hyper-V environment. Import 
+and spin up the collector appliance, and then complete its configuration to connect it to the Azure 
+Migrate project.
+The collector gathers data about VM cores, memory, disk sizes, and network adapters. Where applicable, 
+the collector also gathers performance data like CPU and memory usage, disk IOPS, disk throughput, and 
+network output.
+When the data collection is complete, it's pushed to your Azure Migrate project. On the Azure portal, you 
+can now view all the discovered systems or download a report to review.
+
+
+
+
+Migrate Servers with Azure Migrate
+
+After using Azure Migrate for your assessment, you can decide which of your servers are good candidates 
+to be migrated to Azure.
+Azure Migrate can also perform an agentless migration of virtual and physical servers into Azure. You've 
+chosen to use Azure Migrate to complete the migration of virtual machines.
+In this lesson, you'll review Azure Migrate and how to use it to migrate specific workloads to Azure.
+
+
+Virtual machine replication
+Add Azure Migrate: Server Migration to your Azure Migrate dashboard, which carries over machines 
+and insights from the assessment. You can get begin your replication by clicking Replicate in the tool 
+window. Azure Migrate replicates up to 100 VMs simultaneously.
+Times for replication will vary based on number and size of virtual machines along with connection 
+speeds between your data center and Azure.
+
+
+Post-Migration Steps
+After the migration has taken place, review the security settings of the virtual machine after the migration. Restrict network access for unused services by using network security groups. Deploy Azure Disk 
+Encryption to secure the disks from data theft and unauthorized access.
+Consider improving the resilience of the migrated machines by:
+● Adding a backup schedule that uses Azure Backup.
+● Replicating the machines to a secondary region using Azure Site Recovery.
+Complete clean-up tasks for the remaining on-premises servers. Such tasks may include removing the 
+servers from local backups and removing their raw disk files from storage-area network (SAN) storage to 
+free up space. Update documentation related to the migrated servers to reflect their new IP addresses 
+and locations in Azure
+
+
+Migrate Databases with Azure Database Migration Service
+Azure Database Migration Service enables online and offline migrations from multiple database sources 
+to Azure data platforms, all with minimal downtime. The service uses the Microsoft Data Migration 
+Assistant to generate assessment reports. Identified tasks are then performed by the Database Migration 
+Service.
+In this lesson, you'll see how to use the Data Migration Assistant and Database Migration Service together. They provide a way to move on-premises SQL Server databases efficiently to Azure.
+Offline vs. online migration
+The migration service provides two different ways to migrate SQL Server databases: offline migration or 
+online migration. An offline migration requires shutting down the server at the start of the migration, 
+which means downtime for the service. An online migration uses a continuous synchronization of live 
+data, allowing a cutover to the Azure replica database at any time. The online option is the better of the 
+two if you need to minimize downtime for your workload.
+Azure Database Migration Service has two pricing tiers:
+● Standard: Supports only offline migrations. There's no charge to use this tier.
+● Premium: Supports both offline and online migrations. There's no charge for the first six months. 
+After that period, you'll incur charges.
+Destinations
+Your relational database can be migrated to a number of different destinations in Azure:
+● Single Azure SQL Database instance: A fully managed, single SQL database.
+● Azure SQL Database managed instance: 100% compatible with SQL Server Enterprise Edition 
+Database Engine, but missing some minor SQL Server features.
+● SQL Server on Azure Virtual Machines: An infrastructure-as-a-service (IaaS) offering that runs a full 
+version of SQL Server and supports all the features of SQL Server.
+● Azure Database for MySQL: An Azure database service based on the MySQL Community Edition, 
+versions 5.6 and 5.7.
+● Azure Database for PostgresSQL: An Azure database service based on the community version of the 
+PostgreSQL database engine.
+● Azure Cosmos DB: A globally distributed, multi-model, fully managed database service
+
+
+Overview of Database Migration
+The Data Migration Assistant guides you through the process of migrating databases. You take an 
+existing relational database, split out the database schemas, and then recreate them in the destination 
+Azure SQL Database instance
+
+
+Prerequisites
+Both offline and online migrations have the same prerequisite tasks:
+● Download the Data Migration Assistant: Download and install the assistant locally on your 
+on-premises servers running SQL Server.
+● Create an Azure Virtual Network instance: This virtual network is for Azure Database Migration 
+Service when it uses the Azure Resource Manager deployment model. The virtual network provides 
+connectivity to the on-premises environment.
+● Configure the network security group: The security group associated with the new virtual network 
+should allow inbound connectivity to the service via ports 443, 53, 9354, 445, and 12000.
+● Configure the Windows Firewall: You must configure the firewall to allow the Database Migration 
+Service to connect over port 1433. You can also open port 1434 if multiple named instances on 
+dynamic ports exist on the same server. If you have a named instance(s) you will have to add the 
+port(s) for the named instance(s).
+● Configure credentials
+● Add CONTROL SERVER permissions to the credentials used to connect to the source SQL Server 
+instance.
+● Add CONTROL DATABASE permissions to the credentials used to connect to the target Azure SQL 
+Database instance.
+● Provision your target database in Azure: Create the 
+
+
+Assess the On-Premises Databases
+Ensure that all the communication ports are open, and check the connectivity between the source and 
+destination servers before the migration tasks begin. Using the Data Migration Assistant, create an 
+Assessment project, give the project a name, and select the source and target servers. Provide the 
+connection details for the source server, including credentials with permission to access it. On the 
+database selection screen, choose the database you want to migrate.
+The assessment will generate a report on completion, including a set of recommendations and alternative 
+approaches that could be taken for the migration. You'll see any compatibility issues between the source 
+and destination databases that could cause the migration to fail. Address the issues in the report, running 
+it as many times as you need to make sure that the issues have been fixed
+
+
+
+Migrate the Schema using the Data Migration Assistant
+
+Each database has a schema that represents its entire structure. The schema defines the rules for how the 
+data in it is organized and the relationships between data elements. You migrate the schema before you 
+migrate all the data in the database. Doing this creates an empty structure on the new Azure SQL database, and that structure matches that of the on-premises source database. Migrating the schema also 
+validates the connectivity before you do the full data migration.
+To use the Data Migration Assistant to migrate the schema, create a new Migration project.
+Select your on-premises SQL Server instance as the source server, and your Azure SQL Database instance 
+as the target server. Set the scope of the migration to Schema Only. After you connect to the source 
+database, choose the schema objects to deploy to the new SQL database.
+
+
+Migrate Data with Database Migration Service
+
+In the Azure portal, follow these steps to create an instance of Azure Database Migration Service, and 
+then to run it to migrate the data in your databases:
+1. Create an instance of Azure Database Migration Service. Choose the pricing tier based on whether 
+you need an online or offline migration.
+2. Create a new migration project. Choose the type of migration you want to perform, either offline or 
+online.
+3. Specify source and target server details, including the authentication information.
+4. Identify the databases. Map the relevant target database on the target server to the source server.
+5. Run and monitor the migration.
+● Select the Run migration button to start the migration. The migration activity screen will appear.
+● Track the progress until the process shows as completed.
+6. After all the required databases are migrated, check them to make sure they're working.
+When these steps are complete, your schema and data have been migrated to the Azure SQL Database 
+instance. You can then shut down and decommission your on-premises databases and servers.
+
+
+
+Migrate On-Premises Data to Cloud Storage with AzCopy
+
+AzCopy is a command-line tool for copying data to or from Azure Blob storage, Azure Files, and Azure 
+Table storage, by using simple commands.
+The commands are designed for optimal performance.
+Additionally, using AzCopy to move files, such as log files from a web server a storage target, can significantly reduce costs.
+Using AzCopy, you can either copy data between a file system and a storage account, or between storage 
+accounts. AzCopy may be used to copy data from local (on-premises) data to a storage account.
+In this lesson, you learn how to:
+● Create a storage account.
+● Use AzCopy to upload all your data.
+● Modify the data for test purposes.
+● Create a scheduled task or cron job to identify new files to upload.
+
+
+Review Questions
+Question 1
+A company that you are consulting for has 400 virtual machines hosted in a VMWare environment. The 
+virtual machines vary in size and have various utilization levels.
+The plan to move all the virtual machines in Azure.
+You need to recommend how many and what size Azure virtual machines will be required to move the 
+current workloads to Azure. The solution must minimize administrative effort.
+What should you recommend?
+ Azure Pricing calculator
+ Azure Cost Management
+ Azure Advisor
+ Azure Migrate
+
+Question 2
+You are advising an organization that has an on-premises Hyper-V cluster that hosts 30 virtual machines. 
+Some virtual machines run Window Server 2019 and some are running Linux.
+The organization wants to migrate the virtual machines to an Azure subscription.
+You need to recommend a solution to replicate the disks of the virtual machines to Azure. The solution must 
+ensure that the virtual machines remain available during the migration of the disks.
+You recommend implementing an Azure Storage account, and then using Azure Migrate.
+Does the meet the goal?
+ Yes
+ No
+
+
+
+Module 4 Design Authentication and Authorization
+Tips for Identity and Access Management
+Identity and Access Management
+In cloud-focused architecture, identity provides the basis of a large percentage of security assurances. 
+While legacy IT infrastructure often heavily relied on firewalls and network security solutions at the 
+internet egress points for protection against outside threats, these controls are less effective in cloud 
+architectures with shared services being accessed across cloud provider networks or the internet.
+It is challenging or impossible to write concise firewall rules when you don’t control the networks where 
+these services are hosted, different cloud resources spin up and down dynamically, cloud customers may 
+share common infrastructure, and employees and users expect to be able to access data and services 
+from anywhere.
+To enable all these capabilities, you must manage access based on identity authentication and authorization controls in the cloud services to protect data and resources and to decide which requests should be 
+permitted.
+Additionally, using a cloud-based identity solution like Azure AD offers additional security features that 
+legacy identity services cannot because they can apply threat intelligence from their visibility into a large 
+volume of access requests and threats across many customers.
+This lesson covers the following tips for identity and access management:
+● Single Enterprise Directory
+● Synchronize Identity Systems
+● Use Cloud Provider Identity Source for Third Parties
+● Passwordless, or Multi-Factor Authentication for Admins
+● Block Legacy Authentication
+● Don’t Synchronize On-Premises Admin Accounts to Cloud Identity Providers
+● Use Modern Password Protection Offerings
+
+
+Use a Single Enterprise Directory
+Establish a single enterprise directory for managing identities of full-time employees and enterprise 
+resources
+A single authoritative source for identities increases clarity and consistency for all roles in IT and Security. 
+This reduces security risk from human errors and automation failures resulting from complexity. By 
+having a single authoritative source, teams that need to make changes to the directory can do so in one 
+place and have confidence that their change will take effect everywhere.
+For Azure, designate a single Azure Active Directory (Azure AD) instance directory as the authoritative 
+source for corporate/organizational accounts.
+
+Synchronize Identity Systems
+Synchronize your cloud identity with your existing identity systems.
+Consistency of identities across cloud and on-premises will reduce human errors and resulting security 
+risk. Teams managing resources in both environments need a consistent authoritative source to achieve 
+security assurances.
+For Azure, synchronize Azure AD with your existing authoritative on premises Active Directory using 
+Azure AD connect. This is also required for an Office 365 migration, so it is often already done before 
+Azure migration and development projects begin. Note that administrator accounts should be excepted 
+from synchronization as described in Critical impact account dependencies1.
+
+Block Legacy Authentication
+Disable insecure legacy protocols for internet-facing services.
+Legacy authentication methods are among the top attack vectors for cloud-hosted services. Created 
+before multifactor authentication existed, legacy protocols don’t support additional factors beyond 
+passwords and are therefore prime targets for password spraying, dictionary, or brute force attacks.
+As an example, nearly 100% of all password spray attacks against Office 365 customers use legacy 
+protocols. Additionally, these older protocols frequently lack other attack countermeasures, such as 
+account lockouts or back-off timers. Services running on Microsoft’s cloud that block legacy protocols 
+have observed a 66% reduction in successful account compromises.
+For Azure and other Azure AD-based accounts, configure Conditional Access to block legacy 
+protocols.
+
+
+Disabling legacy authentication can be difficult, as some users may not want to move to new client 
+software that supports modern authentication methods. However, moving away from legacy authentication can be done gradually.
+Start by using metrics and logging from your authentication provider to determine how many users still 
+authenticate with old clients. Next, disable any down-level protocols that aren’t in use, and set up 
+conditional access for all users who aren’t using legacy protocols. Finally, give plenty of notice and 
+guidance to users on how to upgrade before blocking legacy authentication for all users on all services at 
+a protocol level.
+
+
+Don’t Synchronize On-Premises Admin Accounts to Cloud Identity Providers
+
+Don’t synchronize accounts with the highest privilege access to on premises resources as you synchronize 
+your enterprise identity systems with cloud directories.
+This mitigates the risk of an adversary pivoting to full control of on-premises assets following a successful 
+compromise of a cloud account. This helps contain the scope of an incident from growing significantly.
+For Azure, don’t synchronize accounts to Azure AD that have high privileges in your existing Active 
+Directory. This is blocked by default in the default Azure AD Connect configuration, so you only need to 
+confirm you haven’t customized this configuration.
+This is related to the critical impact account dependencies guidance in the administration section that 
+mitigates the inverse risk of pivoting from on-premises to cloud assets.
+
+
+Use Modern Password Protection Offerings
+Provide modern and effective protections for accounts that cannot go passwordless (Passwordless Or 
+multi-factor authentication for admins2).
+Legacy identity providers mostly checked to make sure passwords had a good mix of character types and 
+minimum length, but we have learned that these controls in practice led to passwords with less entropy 
+that could be cracked easier:
+● Microsoft - https://www.microsoft.com/research/publication/password-guidance/
+● NIST - https://pages.nist.gov/800-63-3/sp800-63b.html
+Identity solutions today need to be able to respond to types of attacks that didn't even exist one or two 
+decades ago such as password sprays, breach replays (also called “credential stuffing”) that test username/password pairs from other sites’ breaches, and phishing man-in-the-middle attacks.
+
+
+Cloud identity providers are uniquely positioned to offer protection against these attacks. Since they 
+handle such large volumes of signons, they can apply better anomaly detection and use a variety of data 
+sources to both proactively notify companies if their users’ passwords have been found in other breaches, 
+as well as validate that any given sign-in appears legitimate and is not coming from an unexpected or 
+known-malicious host.
+Additionally, synchronizing passwords to the cloud to support these checks also add resiliency during 
+some attacks. Customers affected by (Not)Petya attacks were able to continue business operations when 
+password hashes were synced to Azure AD (vs. near zero communications and IT services for customers 
+affected organizations that had not synchronized passwords).
+
+
+Use Cross-Platform Credential Management
+
+Use a single identity provider for authenticating all platforms (Windows, Linux, and others) and cloud 
+services.
+A single identity provider for all enterprise assets will simplify management and security, minimizing the 
+risk of oversights or human mistakes. Deploying multiple identity solutions (or an incomplete solution) 
+can result in unenforceable password policies, passwords not reset after a breach, proliferation of passwords (often stored insecurely), and former employees retaining passwords after termination
+
+
+
+
+
+Recommend a Solution for Multi-Factor Authentication
+
+Authentication vs Authorization
+This topic defines authentication and authorization and briefly covers how you can use the Microsoft 
+identity platform to authenticate and authorize users in your web apps, web APIs, or apps calling protected web APIs.
+Authentication is the process of proving you are who you say you are. Authentication is sometimes 
+shortened to AuthN. Microsoft identity platform implements the OpenID Connect protocol for handling 
+authentication.
+Authorization is the act of granting an authenticated party permission to do something. It specifies what 
+data you're allowed to access and what you can do with that data. Authorization is sometimes shortened 
+to AuthZ. Microsoft identity platform implements the OAuth 2.0 protocol for handling authorization.
+
+Authentication and authorization using Microsoft identity platform
+Instead of creating apps that each maintain their own username and password information, which incurs 
+a high administrative burden when you need to add or remove users across multiple apps, apps can 
+delegate that responsibility to a centralized identity provider.
+Delegating authentication and authorization to it enables scenarios such as Conditional Access policies 
+that require a user to be in a specific location, the use of multi-factor authentication as well as enabling a 
+user to sign in once and then be automatically signed in to all of the web apps that share the same 
+centralized directory.
+Microsoft identity platform simplifies authorization and authentication for application developers by 
+providing identity as a service, with support for industry-standard protocols such as OAuth 2.0 and 
+OpenID Connect, as well as open-source libraries for different platforms to help you start coding quickly. 
+It allows developers to build applications that sign in all Microsoft identities, get tokens to call Microsoft 
+Graph, other Microsoft APIs, or APIs that developers have built.
+Following is a brief comparison of the various protocols used by Microsoft identity platform:
+
+● OAuth vs OpenID Connect: OAuth is used for authorization and OpenID Connect (OIDC) is used for 
+authentication. OpenID Connect is built on top of OAuth 2.0, so the terminology and flow are similar 
+between the two. You can even both authenticate a user (using OpenID Connect) and get authorization to access a protected resource that the user owns (using OAuth 2.0) in one request.
+● OAuth vs SAML: OAuth is used for authorization and SAML is used for authentication.
+
+● OpenID Connect vs SAML: Both OpenID Connect and SAML are used to authenticate a user and are 
+used to enable Single Sign On. SAML authentication is commonly used with identity providers such as 
+Active Directory Federation Services (ADFS) federated to Azure AD and is therefore frequently used in 
+enterprise applications. OpenID Connect is commonly used for apps that are purely in the cloud, such 
+as mobile apps, web sites, and web APIs
+
+
+
+Reasons for Multi-Factor Authentication
+Protecting your cloud assets is one of the primary goals for security group. One of the primary ways 
+unauthorized users get access to systems is by obtaining a valid username/password combination. Azure 
+can help mitigate this with several features of Azure Active Directory including:
+● Password complexity rules. This will force users to generate hard(er)-to-guess passwords.
+● Password expiration rules. You can force users to change their passwords on a periodic basis (and 
+avoid using previous-used passwords).
+● Self-service password reset (SSPR). This allows users to self-serve and reset their password if they 
+have forgotten it without involving an IT department.
+● Azure AD Identity Protection. To help protect your organization's identities, you can configure 
+risk-based policies that automatically respond to risky behaviors. These policies can either automatically block the behaviors or initiate remediation, including requiring password changes.
+● Azure AD password protection. You can block commonly used and compromised passwords via a 
+globally banned-password list.
+● Azure AD smart lockout. Smart lockout helps lock out malicious hackers who are trying to guess 
+your users’ passwords or use brute-force methods to get in. It recognizes sign-ins coming from valid 
+users and treats them differently than the ones of malicious hackers and other unknown sources.
+● Azure AD Application Proxy. You can provision security-enhanced remote access to on-premises 
+web applications.
+● Single sign-on (SSO) access to your applications. This includes thousands of pre-integrated SaaS 
+apps.
+● Azure AD Connect. Create and manage a single identity for each user across your hybrid enterprise, 
+keeping users, groups, and devices in sync.
+These are all great options which deter someone guessing or brute-forcing a password. However, sometimes passwords are obtained through social engineering, or poor physical security. In these cases, the 
+above features won't stop an intrusion. Instead, security administrators will want to turn to Azure 
+Multi-Factor Authentication (MFA)
+
+
+
+Conditional Access
+The modern security perimeter now extends beyond an organization's network to include user and device 
+identity. Organizations can utilize these identity signals as part of their access control decisions.
+Conditional Access is the tool used by Azure Active Directory to bring signals together, to make decisions, and enforce organizational policies. Conditional Access is at the heart of the new identity driven 
+control plane.
+
+
+Conditional Access policies at their simplest are if-then statements, if a user wants to access a resource, 
+then they must complete an action. Example: A payroll manager wants to access the payroll application 
+and is required to perform multi-factor authentication to access it.
+Administrators are faced with two primary goals:
+● Empower users to be productive wherever and whenever
+● Protect the organization's assets
+By using Conditional Access policies, you can apply the right access controls when needed to keep your 
+organization secure and stay out of your user’s way when not needed.
+Conditional Access policies are enforced after the first-factor authentication has been completed. Conditional Access is not intended as an organization's first line of defense for scenarios like denial-of-service 
+(DoS) attacks, but can use signals from these events to determine access.
+Conditional Access and Azure Multi-Factor Authentication
+Users and groups can be enabled for Azure Multi-Factor Authentication to prompt for additional verification during the sign-in event. Security defaults are available for all Azure AD tenants to quickly enable the 
+use of the Microsoft Authenticator app for all users.
+For more granular controls, Conditional Access policies can be used to define events or applications that 
+require MFA. These policies can allow regular sign-in events when the user is on the corporate network or 
+a registered device, but prompt for additional verification factors when remote or on a personal device.
+
+
+
+
+Five steps to Securing Identity Infrastructure
+This lesson will help you get a more secure posture using the capabilities of Azure Active Directory by 
+using a five-step checklist to inoculate your organization against cyber-attacks.
+This checklist will help you quickly deploy critical recommended actions to protect your organization 
+immediately by explaining how to:
+● Step 1: Strengthen your credentials.
+● Step 2: Reduce your attack surface area.
+● Step 3: Automate threat response.
+● Step 4: Utilize cloud intelligence.
+● Step 5: Enable end-user self-service.
+Many of the recommendations in this lesson apply only to applications that are configured to use Azure 
+Active Directory as their identity provider. Configuring apps for Single Sign-On assures the benefits of 
+credential policies, threat detection, auditing, logging, and other features add to those applications.
+The recommendations in this lesson are aligned with the Identity Secure Score, an automated assessment 
+of your Azure AD tenant’s identity security configuration. Organizations can use the Identity Secure Score 
+page in the Azure AD portal to find gaps in their current security configuration to ensure they follow 
+current Microsoft best practices for security. Implementing each recommendation in the Secure Score 
+page will increase your score and allow you to track your progress, plus help you compare your implementation against other similar size organizations or your industry
+
+
+
+Recommend a Solution for Single-Sign On (SSO)
+
+Azure Active Directory Seamless Single Sign-On (SSO)
+Azure Active Directory Seamless Single Sign-On (Azure AD Seamless SSO) automatically signs users in 
+when they are on their corporate devices connected to your corporate network. When enabled, users 
+don't need to type in their passwords to sign in to Azure AD, and usually, even type in their usernames. 
+This feature provides your users easy access to your cloud-based applications without needing any 
+additional on-premises components.
+Seamless SSO can be combined with either the Password Hash Synchronization or Pass-through Authentication sign-in methods. Seamless SSO is not applicable to Active Directory Federation Services (ADFS).
+
+
+
+
+Seamless SSO needs the user's device to be domain-joined only, but it is not used on Azure AD Joined or 
+Hybrid Azure AD joined devices. SSO on Azure AD joined and Hybrid Azure AD joined works based on 
+the primary refresh token.
+Key benefits
+● User experience
+● Users are automatically signed into both on-premises and cloud-based applications.
+● Users don't have to enter their passwords repeatedly.
+● Easy to deploy & administer
+● No additional components needed on-premises to make this work.
+● Works with any method of cloud authentication - Password Hash Synchronization or Pass-through 
+Authentication.
+● Can be rolled out to some or all your users using Group Policy.
+● Register non-Windows 10 devices with Azure AD without the need for any AD FS infrastructure. 
+This capability needs you to use version 2.1 or later of the workplace-join client.
+
+
+Features
+● Sign-in username can be either the on-premises default username (userPrincipalName) or 
+another attribute configured in Azure AD Connect (Alternate ID). Both use cases work because 
+Seamless SSO uses the securityIdentifier claim in the Kerberos ticket to look up the corresponding user object in Azure AD.
+● Seamless SSO is an opportunistic feature. If it fails for any reason, the user sign-in experience goes 
+back to its regular behavior - i.e, the user needs to enter their password on the sign-in page.
+● If an application (for example, https://myapps.microsoft.com/contoso.com) forwards a 
+domain_hint (OpenID Connect) or whr (SAML) parameter - identifying your tenant, or login_hint 
+parameter - identifying the user, in its Azure AD sign-in request, users are automatically signed in 
+without them entering usernames or passwords.
+● Users also get a silent sign-on experience if an application (for example, https://contoso.sharepoint.com) sends sign-in requests to Azure AD's endpoints set up as tenants - that is, https://
+login.microsoftonline.com/contoso.com/<..> or https://login.microsoftonline.
+com/<tenant_ID>/<..> - instead of Azure AD's common endpoint - that is, https://login.microsoftonline.com/common/<...>.
+● Sign out is supported. This allows users to choose another Azure AD account to sign in with, instead 
+of being automatically signed in using Seamless SSO automatically.
+● Office 365 Win32 clients (Outlook, Word, Excel, and others) with versions 16.0.8730.xxxx and above are 
+supported using a non-interactive flow. For OneDrive, you will have to activate the OneDrive silent 
+config feature for a silent sign-on experience.
+● It can be enabled via Azure AD Connect.
+● It is a free feature, and you don't need any paid editions of Azure AD to use it.
+● It is supported on web browser-based clients and Office clients that support modern authentication 
+on platforms and browsers capable of Kerberos authentication:
+
+
+
+Considerations - Azure AD Seamless Single Sign-On
+Below are key considerations for recommending Azure Active Directory Seamless Single Sign-On (Seamless SSO).
+What sign-in methods do Seamless SSO work with?
+Seamless SSO can be combined with either the Password Hash Synchronization or Pass-through Authentication sign-in methods. This feature cannot be used with Active Directory Federation Services (ADFS).
+Is Seamless SSO a free feature?
+Seamless SSO is a free feature and you don't need any paid editions of Azure AD to use it.
+Is Seamless SSO available in the Microsoft Azure Germany 
+cloud and the Microsoft Azure Government cloud?
+No. Seamless SSO is only available in the worldwide instance of Azure AD.
+What applications take advantage of domain_hint or 
+login_hint parameter capability of Seamless SSO?
+Listed below is a non-exhaustive list of applications that can send these parameters to Azure AD, and 
+therefore provides users a silent sign-on experience using Seamless SSO (i.e., no need for your users to 
+input their usernames or passwords):
+
+
+
+
+Recommend a Solution for a Hybrid Identity
+Considerations - Multi-Factor Authentication for 
+Hybrid Identity
+An evaluation is important to define the technical requirements for setting up and enabling the organizations users for multi-factor authentication.
+Answer the following:
+● Is your company trying to secure Microsoft apps?
+● How are apps published?
+● Does your company provide remote access to allow employees to access on-premises apps?
+If yes, what type of remote access? You also need to evaluate where the users who are accessing these 
+applications will be located. This evaluation is another important step to define the proper multi-factor 
+authentication strategy. Make sure to answer the following questions:
+● Where are the users going to be located?
+● Can they be located anywhere?
+● Does your company want to establish restrictions according to the user’s location?
+It's important to also evaluate the user’s requirements for multi-factor authentication. This evaluation is 
+important because it will define the requirements for rolling out multi-factor authentication. Make sure to 
+answer the following questions:
+● Are the users familiar with multi-factor authentication?
+● Will some uses be required to provide additional authentication?
+● If yes, all the time, when coming from external networks, or accessing specific applications, or under 
+other conditions?
+● Will the users require training on how to setup and implement multi-factor authentication?
+● What are the key scenarios that your company wants to enable multi-factor authentication for 
+their users?
+You should now understand if there are multi-factor authentication already implemented on-premises. 
+This evaluation is important to define the technical requirements for setting up and enabling the organizations users for multi-factor authentication. Make sure to answer the following questions:
+● Does your company need to protect privileged accounts with MFA?
+● Does your company need to enable MFA for certain application for compliance reasons?
+
