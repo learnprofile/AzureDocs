@@ -1,0 +1,30 @@
+
+    
+For LAbs >>>>>>
+1. https://github.com/MicrosoftLearning/AZ-300-MicrosoftAzureArchitectTechnologies
+2. https://github.com/MicrosoftLearning/AZ-304-Microsoft-Azure-Architect-Design
+3. https://github.com/MicrosoftLearning/AZ-103-MicrosoftAzureAdministrator
+4. https://github.com/MicrosoftLearning/AZ-500-Azure-Security
+5. https://github.com/MicrosoftLearning/AZ-104-MicrosoftAzureAdministrator
+6. https://azurecitadel.com/
+
+For Docs:>>>>>>
+ 1.https://docs.microsoft.com/en-us/azure/
+2.https://azure.microsoft.com/en-us/blog/
+3.https://blogs.technet.microsoft.com/uktechnet/tag/azure/
+4.https://docs.microsoft.com/en-us/learn/
+5.https://docs.microsoft.com/en-us/azure/architecture/
+For Videos: >>>>>>
+ 1.https://channel9.msdn.com/Tags/azure
+2.https://www.youtube.com/user/OfficeGarageSeries
+3.https://www.youtube.com/channel/UC0m-80FnNY2Qb7obvTL_2fA
+4.https://www.youtube.com/channel/UCrhJmfAGQ5K81XQ8_od1iTg
+For free Hand-On-Labs
+ 1.https://www.microsoft.com/handsonlabs/selfpacedlabs
+For Exams/Dumps:>>>>>>
+1.https://vceplus.com/exam-az-300/
+2.https://vceplus.com/exam-ms-301/
+3.https://theghl.in/
+4.https://vceplus.com/exam-az-500-microsoft-azure-security-technologies/
+5.https://www.examtopics.com/exams/
+6. https://www.certbolt.com/az-104-dumps
