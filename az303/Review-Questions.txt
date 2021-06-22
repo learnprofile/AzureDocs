@@ -1,0 +1,203 @@
+Module 1 Review Question
+
+Question 1
+An organization that you are advising has MFA enabled for all users.
+
+They have MFA configured to send verification codes to their user’s cell phones.
+
+You are asked to recommend how they should configure an additional MFA verification option for their users.
+
+They have an Azure AD tenant.
+
+What should you advise?
+
+From the Security blade of Azure AD configure the Authentication settings
+From the Security blade of Azure AD configure the phone call settings
+From Multi-Factor Authentication, configure in the service settings
+Azure Policy
+
+
+
+
+Question 2
+You are advising a company that has enabled MFA for all its users.
+
+The company’s support desk is seeing an increase in support tickets from users who are receiving MFA requests while working within the company’s main campus.
+
+You are asked to provide a recommendation that prevents the users from receiving MFA requests while on the main campus. The company has an Azure subscription.
+
+What do you advise?
+
+From the MFA service settings, create a trusted IP range.
+From the conditional access in Azure AD, create a named location.
+From the conditional access in Azure AD, create a custom control.
+From the conditional access in Azure AD, configure organizational relationships.
+
+
+
+
+Module 2 Review Question
+Question 1
+An organization you advise has an Azure Directory forest named Tailwind.com.
+
+They have installed an configured Azure AD Connect to use password hash synchronization as the single sign-on (SSO) approach. Note: Staging mode is enabled.
+
+They have reviewed the synchronization results and noticed that the Synchronization Service Manager doesn’t display any previous sync jobs.
+
+You are asked to find a way to ensure that the synchronization completes successfully.
+
+What do you advise?
+
+From Synchronization Service Manager, run a full import
+Run AD Connect and disable staging mode.
+Run AD Connect and set the SSO method to Pass-Through authentication.
+Run from Azure PowerShell, Start-AdSyncSyncCycle -policyType Initial.
+
+
+
+Module 3 Review Questions
+Question 1
+You have a VM with two NICs named NIC1 and NIC2. NIC1 is connected to the 10.10.8.0/24 subnet. NIC2 is connected to the 10.20.8.0/24 subnet. You plan to update the VM configuration to provide the following functionality:
+
+Enable direct communication from the internet to TCP port 443.
+
+Maintain existing communication across the 10.10.8.0/24 and 10.20.8.0/24 subnets.
+
+Maintain a simple configuration whenever possible.
+
+You need to update the VM configuration to support the new functionality. What should you do? Select one.
+
+Remove the private IP address from NIC2 and then assign a public IP address to it. Then, create an inbound security rule.
+Add a third NIC and associate a public IP address to it. Then, create an inbound security rule.
+Associate a public IP address to NIC2 and create an inbound security rule for TCP port 443.
+Create an inbound security rule for TCP port 443.
+
+
+Question 2
+You're currently using network security groups (NSGs) to control how your network traffic flows in and out of your virtual network subnets and network interfaces.
+
+You want to customize how your NSGs work. For all incoming traffic, you need to apply your security rules to both the virtual machine and subnet level.
+
+Which of the following options will let you accomplish this? (Choose two)
+
+Configure the AllowVNetInBound security rule for all new NSGs.
+Create rules for both NICs and subnets with an allow action.
+Delete the default rules.
+Add rules with a higher priority than the default rules.
+
+
+
+Module 4 Review Questions
+Question 1
+A company you are advising is planning to use a line-of-business, third-party software package to perform complicated data analysis. The software will use 350 VMs that are based on an Azure Marketplace VM image.
+You are asked to design the infrastructure for the software application server. The solution should meet the following needs:
+
+The number of VMs that are running at any time must change when the user workload changes.
+
+When a new version of the application is available in the Azure Marketplace it must be deployed without causing application downtime.
+
+Use VM scale sets.
+
+Minimize the need for ongoing maintenance.
+
+Which two technologies would you recommend?
+
+A single placement group
+Managed disks
+Autoscale
+A single storage account
+A point-to-site VPN
+
+Question 2
+An organization you are advising is running a single application that runs on a VM. The traffic to the application as recently been on the increase and continues to rise.
+
+The application cannot experience downtime must scale dynamically.
+
+You are asked to recommend an auto-scale approach so the VM can respond well to the workload requirements.
+
+Which three options would you recommend?
+
+Deploy application automatic horizontal scaling
+Implement custom auto-scale
+Create a VM scale set
+Implement an Azure Load Balancer
+
+Question 3
+You are researching Microsoft Azure for your company. The company is considering deploying Windows-based VMs in Azure. However, before moving forward, the management team has asked you to research the costs associated with Azure VMs. You need to document the configuration options that are likely to save the company money on their Azure VMs. Which options should you document? (Each answer presents part of the solution. Select four.
+
+Use HDD instead of SSD for VM storage.
+Use unmanaged premium storage instead of managed standard storage.
+Bring your own Windows custom images.
+Use different Azure regions.
+Use the least powerful VMs that meet your requirements.
+Place all VMs in the same resource group.
+Bring your own Windows license for each VM.
+
+Question 4
+You are planning to deploy several Linux VMs in Azure. The security team issues a policy that Linux VMs must use an authentication system other than passwords. You need to deploy an authentication method for the Linux VMs to meet the requirement. Which authentication method should you use? Select one.
+
+SSH key pair
+Azure multi-factor authentication
+Access keys
+Shared access signature
+Security vault certificate
+
+Question 5
+Another IT administrator creates an Azure virtual machine scale set with 5 VMs. Later, you notice that the VMs are all running at max capacity with the CPU being fully consumed. However, additional VMs are not deploying in the scale set. You need to ensure that additional VMs are deployed when the CPU is 75% consumed. What should you do? Select one.
+
+Enable the autoscale option.
+Increase the instance count.
+Add the scale set automation script to the library.
+Deploy the scale set automation script.
+
+Question 6
+Your company is preparing to deploy an application to Microsoft Azure. The app is a self-contained unit that runs independently on several servers. The company is moving the app to the cloud to provide better performance. To get better performance, the team has the following requirements:
+
+If the CPU across the servers goes above 85%, a new VM should be deployed to provide additional resources.
+
+If the CPU across the servers drops below 15%, an Azure VM running the app should be decommissioned to reduce costs.
+
+You need to deploy a solution to meet the requirements while minimizing the administrative overhead to implement and manage the solution. What should you do? Select one.
+
+Deploy the app in a virtual machine scale set.
+Deploy the app in a virtual machine availability set.
+Deploy the app by using a resource manager template.
+Deploy the app and use PowerShell Desired State Configuration (DSC).
+
+
+
+
+Module 5 Review Questions
+Question 1
+Your company provides customers a virtual network in the cloud. You have dozens of Linux virtual machines in another virtual network. You need to install an Azure load balancer to direct traffic between the virtual networks. What should you do? Select one.
+
+Install a private load balancer.
+Install a public load balancer.
+Install an external load balancer.
+Install an internal load balancer.
+Install a network load balancer.
+
+Question 2
+You are advising a company that is planning to create a virtual network that has a scale set that contains ten VMs.
+They have a monitoring solution on a separate network that will need to access the VMs within the scale set.
+They want to define public access to the virtual machines.
+You recommend that they implement an Azure Load Balancer to for connecting the monitoring solution to the VMs. Does this recommendation fulfill the goal?
+
+Yes
+No
+
+Question 3
+Your organization has Azure VMs deployed to three Azure regions. Each region contains a single virtual network that has four VMs on the same subnet. Each virtual machine runs an application named OEM_APP_3. OEM_APP_3 is accessible by using HTTPs.
+
+The VMs are cannot be accessed from the Internet.
+
+You are asked to use Azure Front Door to load balance requests from OEM_SQL_3 across all the VMs.
+
+What other Azure service should you enable?
+
+An internal Azure Load Balancer
+Azure Private Link
+A public Azure Load Balancer
+Enable High Availability ports
+
+
