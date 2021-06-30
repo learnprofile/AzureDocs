@@ -1,0 +1,8 @@
+.vs/
+*/*/bin
+*/*/obj
+AzureStorage/packages/
+*.suo
+*/*/*/obj
+*/*/*/bin
+*/*/packages/

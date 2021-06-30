@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26430.13
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QueueExplorer", "QueueExplorer\QueueExplorer.csproj", "{7B4BF348-0F5E-4233-95F2-B7715D570456}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QueueHandler", "QueueHandler\QueueHandler.csproj", "{F40A0E6E-5826-4601-83FE-D6B5FAD4930F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7B4BF348-0F5E-4233-95F2-B7715D570456}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7B4BF348-0F5E-4233-95F2-B7715D570456}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7B4BF348-0F5E-4233-95F2-B7715D570456}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7B4BF348-0F5E-4233-95F2-B7715D570456}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F40A0E6E-5826-4601-83FE-D6B5FAD4930F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F40A0E6E-5826-4601-83FE-D6B5FAD4930F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F40A0E6E-5826-4601-83FE-D6B5FAD4930F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F40A0E6E-5826-4601-83FE-D6B5FAD4930F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
