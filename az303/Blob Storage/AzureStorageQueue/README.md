@@ -1,7 +1,5 @@
 ---
-services: storage
-platforms: dotnet
-author: azureashish
+
 ---
 
 # Azure Queue Service in .NET
