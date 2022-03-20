@@ -1,0 +1,24 @@
+Azure Links
+
+
+Azure Status dashboard:
+https://status.azure.com/en-us/status
+
+
+Azure Latency test:
+https://www.azurespeed.com/Azure/RegionToRegionLatency
+
+
+Azure ARM templates:
+https://github.com/Azure/azure-quickstart-templates
+
+Azure ARM Templates 101
+https://github.com/Azure/AzureStack-QuickStart-Templates
+
+Az-303 docs
+https://github.com/MicrosoftLearning/AZ-303-Microsoft-Azure-Architect-Technologies
+
+
+Az-304 docs
+https://github.com/MicrosoftLearning/AZ-304-Microsoft-Azure-Architect-Design
+
